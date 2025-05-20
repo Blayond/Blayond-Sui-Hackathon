@@ -3,11 +3,6 @@ import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 import { cn } from '@/lib/utils';
 
-// Assuming Geist font files are correctly set up to be imported as CSS variables
-// For example, if using next/font:
-// import { GeistSans } from 'geist/font/sans';
-
-
 export const metadata: Metadata = {
   title: 'Blayond',
   description: 'RUN LOUD. STAND PROUD.',
@@ -20,6 +15,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={cn("dark")}>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Darker+Grotesque:wght@300..900&display=swap" rel="stylesheet" />
+      </head>
       <body className="font-sans antialiased">
         {children}
         <Toaster />
