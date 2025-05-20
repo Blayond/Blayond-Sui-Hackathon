@@ -2,7 +2,7 @@
 "use client";
 
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation'; // Imported useRouter
+import { useRouter } from 'next/navigation'; 
 import { onAuthStateChanged, User, signOut } from 'firebase/auth';
 import { auth } from '@/lib/firebase/config';
 import { Button } from '@/components/ui/button';
@@ -14,10 +14,14 @@ import { Settings, Flame, Play, BookOpen, Wallet } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
 
 export default function HomePage() {
-  const router = useRouter(); // Initialized useRouter
+  const router = useRouter(); 
   const { toast } = useToast();
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isWalletLoading, setIsWalletLoading] = useState(false);
+  const [isRunLoading, setIsRunLoading] = useState(false);
+  const [isJournalLoading, setIsJournalLoading] = useState(false);
+
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -43,21 +47,22 @@ export default function HomePage() {
   };
 
   const handleConnectWallet = () => {
+    setIsWalletLoading(true);
     toast({
       title: "Coming Soon!",
       description: "Connect wallet functionality is not yet implemented.",
     });
+    setTimeout(() => setIsWalletLoading(false), 1000);
   };
 
   const handleStartRun = () => {
-    router.push('/run'); // Navigate to /run page
+    setIsRunLoading(true);
+    router.push('/run'); 
   };
 
   const handleJournal = () => {
-    toast({
-      title: "Coming Soon!",
-      description: "Journal functionality is not yet implemented.",
-    });
+    setIsJournalLoading(true);
+    router.push('/journal');
   };
 
   if (isLoading) {
@@ -69,8 +74,10 @@ export default function HomePage() {
   }
 
   if (!user) {
-    return null; // Redirect is handled in useEffect
+    return null; 
   }
+
+  const anyButtonLoading = isWalletLoading || isRunLoading || isJournalLoading;
 
   return (
     <div className="flex min-h-screen flex-col items-center bg-background text-foreground relative">
@@ -78,12 +85,17 @@ export default function HomePage() {
       <div className="fixed top-0 left-0 right-0 z-10 flex h-16 w-full items-center justify-between bg-background/80 px-4 py-2 backdrop-blur-sm md:max-w-md md:left-1/2 md:-translate-x-1/2">
         <Button
           onClick={handleConnectWallet}
+          disabled={anyButtonLoading}
           className="bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--accent))] text-primary-foreground hover:opacity-90 transition-opacity text-xs font-semibold py-2 px-3 rounded-md h-auto"
         >
-          <Wallet className="mr-1 h-4 w-4" />
-          CONNECT WALLET
+          {isWalletLoading ? (
+            <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-primary-foreground"></div>
+          ) : (
+            <Wallet className="mr-1 h-4 w-4" />
+          )}
+          {isWalletLoading ? 'CONNECTING...' : 'CONNECT WALLET'}
         </Button>
-        <Button variant="ghost" size="icon" onClick={handleSignOut} aria-label="Settings and Sign Out">
+        <Button variant="ghost" size="icon" onClick={handleSignOut} aria-label="Settings and Sign Out" disabled={anyButtonLoading}>
           <Settings className="h-6 w-6 text-foreground" />
         </Button>
       </div>
@@ -152,16 +164,26 @@ export default function HomePage() {
         {/* Action Buttons */}
         <div className="grid grid-cols-2 gap-4 w-full pt-4">
           <Button 
-            onClick={handleStartRun} // Added onClick handler
+            onClick={handleStartRun} 
+            disabled={anyButtonLoading}
             className="bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--accent))] text-primary-foreground hover:opacity-90 transition-opacity text-base font-bold py-4 rounded-lg h-auto">
-            <Play className="mr-2 h-5 w-5" />
-            START RUN
+            {isRunLoading ? (
+                <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-primary-foreground mr-2"></div>
+            ) : (
+                <Play className="mr-2 h-5 w-5" />
+            )}
+            {isRunLoading ? 'LOADING...' : 'START RUN'}
           </Button>
           <Button 
             onClick={handleJournal}
+            disabled={anyButtonLoading}
             className="bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--accent))] text-primary-foreground hover:opacity-90 transition-opacity text-base font-bold py-4 rounded-lg h-auto">
-            <BookOpen className="mr-2 h-5 w-5" />
-            JOURNAL
+            {isJournalLoading ? (
+                <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-primary-foreground mr-2"></div>
+            ) : (
+                <BookOpen className="mr-2 h-5 w-5" />
+            )}
+            {isJournalLoading ? 'LOADING...' : 'JOURNAL'}
           </Button>
         </div>
       </main>
