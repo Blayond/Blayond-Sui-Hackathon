@@ -12,10 +12,15 @@ export default function HexagonLogo() {
         </defs>
         <polygon
           points="50,0 93.3,28.87 93.3,86.6 50,115.47 6.7,86.6 6.7,28.87"
-          fill="url(#logoGradient)"
+          fill="none" // Changed: Hexagon is not filled
+          stroke="url(#logoGradient)" // Changed: Hexagon has a gradient stroke
+          strokeWidth="5" // Added strokeWidth for visibility
         />
       </svg>
-      <RunnerIcon className="absolute inset-0 m-auto h-12 w-12 text-primary-foreground" />
+      <RunnerIcon
+        gradientId="logoGradient" // Pass the gradient ID to the runner
+        className="absolute inset-0 m-auto h-12 w-12" // Runner icon will be filled by the gradient
+      />
     </div>
   );
 }
