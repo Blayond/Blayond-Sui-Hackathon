@@ -223,6 +223,7 @@ Validation through community surveys and runner interviews
 Core feature mapping: run tracking, AI coaching, feed-based interaction
 Visual identity, branding, and UX concept development
 Prototype testing with early users
+
 Phase 2 – Pilot Launch & Refinement
 Testing core features and gathering data with real runners.
 Release of MVP with Run Tracker, Community Feed, and AI Coach
@@ -231,6 +232,7 @@ In-app journaling, challenge system, and reward mechanics
 Integration of head-to-head wagers and leaderboard logic
 Feedback loop with testers to improve usability and engagement
 Wallet setup and initial payment system (QR code + Web3-ready)
+
 Phase 3 – Onboarding & Social Growth
 Turning early traction into a vibrant user base.
 Public onboarding flow with referral and challenge incentives
@@ -239,6 +241,7 @@ Feed engagement tools: likes, comments, reposts, and tipping
 Expansion of leaderboard categories and social clout badges
 Launch of user profile hubs with integrated stats and streak history
 Gamified onboarding tasks and daily challenges
+
 Phase 4 – Expansion & Ecosystem Partnerships
 Scaling the product and building a thriving rewards network.
 Brand reward marketplace integration (vouchers, merch, NFTs)
@@ -247,19 +250,28 @@ Regional leaderboard competitions and open tournaments
 Web3 wallet and data ownership opt-in framework
 Rollout of analytics dashboard for community insights
 Cross-platform launch planning (web + mobile) for wider access
+
 Revenue
+
 BLAYOND combines SocialFi mechanics with real economic incentives through five synergistic revenue streams. These mechanisms align user motivation with platform growth, creating a sustainable ecosystem for runners, partners, and the platform itself.
+
 1. Competition Fees
 BLAYOND hosts open competitions where users pay a registration fee to join limited-slot races. The prize pool is collected from participants, and a small percentage is retained by BLAYOND as a platform fee. This model encourages participation while creating a recurring revenue stream from competitive engagement.
+
 2. Head-to-Head Wager Fees
 Users can initiate one-on-one running challenges directly from the leaderboard or community posts. Each participant wagers funds, and the winner takes the pot. BLAYOND charges a small percentage fee on each completed challenge, allowing the platform to earn from competitive peer-to-peer activity without interrupting the flow of the game.
+
 3. Brand Reward Partnerships
 BLAYOND’s in-app reward system allows users to redeem points for brand-sponsored offers. Fitness brands, wellness companies, and sportswear partners can list their products or services in the rewards marketplace in exchange for listing fees or affiliate revenue agreements. This creates value for users while generating revenue from aligned commercial partners.
+
 4. Top-Up & Payment Margins
 To participate in paid competitions and wagers, users need to deposit funds into their in-app wallet. BLAYOND supports fiat and crypto top-ups through QR-based payment systems. A small margin is added to each deposit to cover transaction handling and generate additional platform revenue.
+
 5. Opt-In Data Monetisation
 With full transparency and user consent, BLAYOND offers anonymised performance, behavioural, and community data to selected partners. This data can be valuable for sports brands, wellness researchers, or health-focused organisations. Only users who opt in will contribute to this model, maintaining user trust and ethical data use.
+
 Security and Privacy
+
 BLAYOND is built with a security-first and privacy-driven foundation. From the start, the platform is designed to give runners full control over their data, with blockchain technology used to enhance transparency, security, and trust.
 All personal data within BLAYOND, including performance statistics, journal entries, behavioural trends, and health-related inputs, is handled with care and stored on a system that prioritises security and integrity. 
 Blockchain is used to create a tamper-resistant environment where data ownership is verifiable and protected. This ensures that no information can be altered or accessed without the user's knowledge and permission.
