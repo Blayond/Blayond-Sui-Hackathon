@@ -74,7 +74,7 @@ export default function JournalPage() {
         <div className="flex flex-col items-center space-y-3 text-center">
           <Avatar className="h-32 w-32 border-4 border-card">
             <Image 
-              src="https://placehold.co/200x200.png" 
+              src="/assets/profilepicture.png" 
               alt="User Avatar" 
               width={200} 
               height={200} 
