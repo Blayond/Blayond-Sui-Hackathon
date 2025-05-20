@@ -51,7 +51,7 @@ export default function RunPage() {
             <div>
               <p className="text-xs md:text-sm text-muted-foreground">Distance</p>
               <p className="text-3xl md:text-4xl font-bold text-foreground">
-                4,23<span className="text-xl md:text-2xl opacity-80">km</span>
+                0,00<span className="text-xl md:text-2xl opacity-80">km</span>
               </p>
             </div>
           </div>
@@ -80,11 +80,11 @@ export default function RunPage() {
               />
               {/* Current position indicator on the path's end */}
               <circle
-                cx="280" 
+                cx="20" 
                 cy="60"
                 r="7" 
                 fill="hsl(var(--background))"
-                stroke="hsl(var(--accent))"
+                stroke="hsl(var(--primary))" // Start color of gradient
                 strokeWidth="3"
               />
             </svg>
@@ -94,19 +94,18 @@ export default function RunPage() {
           <div className="grid grid-cols-3 gap-x-2 text-center">
             <div className="flex flex-col items-center">
               <Heart className="h-5 w-5 md:h-6 md:w-6 text-primary mb-1" />
-              <p className="text-xl md:text-2xl font-bold text-foreground">158 <span className="text-sm md:text-base opacity-80">bpm</span></p>
+              <p className="text-xl md:text-2xl font-bold text-foreground">0 <span className="text-sm md:text-base opacity-80">bpm</span></p>
               <p className="text-xs text-muted-foreground mt-0.5">Heart Rate</p>
             </div>
             <div className="flex flex-col items-center">
               <Flame className="h-5 w-5 md:h-6 md:w-6 text-accent mb-1" />
-              <p className="text-xl md:text-2xl font-bold text-foreground">326</p>
+              <p className="text-xl md:text-2xl font-bold text-foreground">0</p>
               <p className="text-xs text-muted-foreground mt-0.5">Calories</p>
             </div>
             <div className="flex flex-col items-center">
               <Footprints className="h-5 w-5 md:h-6 md:w-6 text-primary mb-1" />
-              <p className="text-xl md:text-2xl font-bold text-foreground">572 <span className="text-sm md:text-base opacity-80">spm</span></p>
-              {/* Assuming the line below was for elevation, keeping it for now */}
-              <p className="text-base md:text-lg font-bold text-foreground -mt-1">58 <span className="text-xs md:text-sm opacity-80">m</span></p>
+              <p className="text-xl md:text-2xl font-bold text-foreground">0 <span className="text-sm md:text-base opacity-80">spm</span></p>
+              <p className="text-xs text-muted-foreground mt-0.5">Pace</p> 
             </div>
           </div>
         </CardContent>
