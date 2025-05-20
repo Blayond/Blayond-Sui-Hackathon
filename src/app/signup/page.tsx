@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from 'next/link';
@@ -7,7 +8,7 @@ import { Input } from '@/components/ui/input';
 import AuthFormWrapper from '@/components/auth/auth-form-wrapper';
 import HexagonLogo from '@/components/auth/hexagon-logo';
 import { GoogleIcon } from '@/components/icons/google-icon';
-import { Wallet } from 'lucide-react'; // Using lucide-react Wallet icon
+import { Wallet } from 'lucide-react'; 
 
 export default function SignUpPage() {
   const router = useRouter();
@@ -44,13 +45,13 @@ export default function SignUpPage() {
         <Input
           type="email"
           placeholder="Email"
-          className="rounded-lg border-[hsl(var(--border))] bg-[hsl(var(--input))] focus:ring-2 focus:ring-[hsl(var(--ring))]"
+          className="rounded-lg border-[hsl(var(--border))] bg-[hsl(var(--input))] text-[hsl(var(--foreground))] placeholder:text-[hsl(var(--muted-foreground))] focus:ring-2 focus:ring-[hsl(var(--ring))]"
           aria-label="Email"
         />
         <Input
           type="password"
           placeholder="Create a password"
-          className="rounded-lg border-[hsl(var(--border))] bg-[hsl(var(--input))] focus:ring-2 focus:ring-[hsl(var(--ring))]"
+          className="rounded-lg border-[hsl(var(--border))] bg-[hsl(var(--input))] text-[hsl(var(--foreground))] placeholder:text-[hsl(var(--muted-foreground))] focus:ring-2 focus:ring-[hsl(var(--ring))]"
           aria-label="Create a password"
         />
       </div>
@@ -69,20 +70,22 @@ export default function SignUpPage() {
       </div>
 
       <div className="space-y-4">
-        <Button
-          variant="outline"
-          onClick={handleGoogleLogin}
-          className="w-full bg-neutral-700 hover:bg-neutral-600 text-primary-foreground border-neutral-700 hover:border-neutral-600 py-3 rounded-lg"
-        >
-          <GoogleIcon className="mr-2 h-5 w-5" />
-          Continue with Google
-        </Button>
+        <div className="p-[2px] bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--accent))] rounded-lg">
+          <Button
+            variant="outline"
+            onClick={handleGoogleLogin}
+            className="w-full bg-[hsl(var(--background))] border-none hover:bg-[hsl(var(--input))] text-[hsl(var(--foreground))] py-3 rounded-[calc(var(--radius)-2px)]"
+          >
+            <GoogleIcon className="mr-2 h-5 w-5" />
+            Continue with Google
+          </Button>
+        </div>
         
         <div className="p-[2px] bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--accent))] rounded-lg">
           <Button
             variant="outline"
             onClick={handleWalletSignUp}
-            className="w-full bg-[hsl(var(--background))] border-none hover:bg-[hsl(var(--input))] text-[hsl(var(--foreground))] py-3 rounded-[calc(var(--radius)-2px)]" // inner radius adjusted
+            className="w-full bg-[hsl(var(--background))] border-none hover:bg-[hsl(var(--input))] text-[hsl(var(--foreground))] py-3 rounded-[calc(var(--radius)-2px)]" 
           >
             <Wallet className="mr-2 h-5 w-5" />
             Sign up with Wallet

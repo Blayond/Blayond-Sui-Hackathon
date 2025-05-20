@@ -44,25 +44,25 @@ body {
   }
 
   .dark {
-    --background: 231 60% 29%; /* Deep Navy Blue #1A237E */
+    --background: 213 100% 5%; /* #000B1B */
     --foreground: 0 0% 98%; /* White */
-    --card: 231 60% 25%; /* Slightly darker navy for cards */
+    --card: 213 80% 8%; 
     --card-foreground: 0 0% 98%;
-    --popover: 231 60% 25%;
+    --popover: 213 80% 8%;
     --popover-foreground: 0 0% 98%;
-    --primary: 336 83% 66%; /* Vibrant Pink #F06292 */
-    --primary-foreground: 0 0% 98%; /* White text on pink */
-    --secondary: 231 60% 35%; /* Lighter navy for secondary elements */
+    --primary: 329 100% 59%; /* #FF2DAE (Pink) */
+    --primary-foreground: 0 0% 98%; 
+    --secondary: 213 60% 12%; 
     --secondary-foreground: 0 0% 98%;
-    --muted: 231 60% 32%; /* Muted navy */
-    --muted-foreground: 0 0% 63.9%; /* Lighter gray for muted text */
-    --accent: 33 100% 63%; /* Soft Orange #FFAB40 */
-    --accent-foreground: 231 60% 15%; /* Dark navy text on orange for contrast */
-    --destructive: 0 84.2% 60.2%; /* Default Red */
+    --muted: 213 50% 10%; 
+    --muted-foreground: 210 20% 70%; /* Light gray for placeholders, "OR" text */
+    --accent: 29 100% 50%; /* #FF7A00 (Orange) */
+    --accent-foreground: 0 0% 10%; 
+    --destructive: 14 100% 50%; /* #FF3D00 (Reddish-Orange for 'Sign in here') */
     --destructive-foreground: 0 0% 98%;
-    --border: 231 50% 45%; /* Lighter navy border for inputs etc. */
-    --input: 231 50% 35%; /* Input background, slightly lighter than main bg */
-    --ring: 336 83% 70%; /* Ring color (pinkish) for focus states */
+    --border: 213 30% 20%; /* Subtle border for inputs, buttons */
+    --input: 213 40% 9%; /* Dark input background */
+    --ring: 329 100% 65%; /* Pinkish ring for focus */
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;
