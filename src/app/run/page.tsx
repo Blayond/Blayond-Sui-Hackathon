@@ -1,12 +1,35 @@
 
 "use client";
 
+import { useState, useEffect } from 'react';
 import SiteLogo from '@/components/common/SiteLogo';
 import BottomNavigation from '@/components/layout/bottom-navigation';
 import { Card, CardContent } from '@/components/ui/card';
 import { Heart, Flame, Footprints } from 'lucide-react';
 
 export default function RunPage() {
+  const [elapsedSeconds, setElapsedSeconds] = useState(0);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setElapsedSeconds(prevSeconds => prevSeconds + 1);
+    }, 1000);
+
+    return () => clearInterval(intervalId); // Cleanup interval on component unmount
+  }, []);
+
+  const formatTime = (totalSeconds: number) => {
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+
+    const formattedHours = String(hours).padStart(2, '0');
+    const formattedMinutes = String(minutes).padStart(2, '0');
+    const formattedSeconds = String(seconds).padStart(2, '0');
+
+    return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+  };
+
   return (
     <div className="flex min-h-screen flex-col items-center bg-background text-foreground relative pb-20">
       {/* Top Content: Logo and Title */}
@@ -22,7 +45,7 @@ export default function RunPage() {
             <div>
               <p className="text-xs md:text-sm text-muted-foreground">Duration</p>
               <p className="text-3xl md:text-4xl font-bold text-foreground">
-                00:20:10
+                {formatTime(elapsedSeconds)}
               </p>
             </div>
             <div>
@@ -93,4 +116,3 @@ export default function RunPage() {
     </div>
   );
 }
-
