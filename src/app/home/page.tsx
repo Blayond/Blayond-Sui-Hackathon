@@ -2,19 +2,19 @@
 "use client";
 
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation'; // Imported useRouter
 import { onAuthStateChanged, User, signOut } from 'firebase/auth';
 import { auth } from '@/lib/firebase/config';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
-import SiteLogo from '@/components/common/SiteLogo'; // Updated import
+import SiteLogo from '@/components/common/SiteLogo';
 import BottomNavigation from '@/components/layout/bottom-navigation';
 import { Settings, Flame, Play, BookOpen, Wallet } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
 
 export default function HomePage() {
-  const router = useRouter();
+  const router = useRouter(); // Initialized useRouter
   const { toast } = useToast();
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -49,6 +49,17 @@ export default function HomePage() {
     });
   };
 
+  const handleStartRun = () => {
+    router.push('/run'); // Navigate to /run page
+  };
+
+  const handleJournal = () => {
+    toast({
+      title: "Coming Soon!",
+      description: "Journal functionality is not yet implemented.",
+    });
+  };
+
   if (isLoading) {
     return (
       <div className="flex min-h-screen flex-col items-center justify-center bg-background p-4">
@@ -80,7 +91,7 @@ export default function HomePage() {
       {/* Main Content Area */}
       <main className="flex flex-col items-center w-full max-w-md mx-auto px-4 space-y-6 flex-grow pt-20 pb-24">
         <div className="flex flex-col items-center space-y-2">
-          <SiteLogo /> {/* Updated component */}
+          <SiteLogo />
           <h1 className="text-4xl font-bold text-gradient-pink-orange">BLAYOND</h1>
         </div>
 
@@ -140,11 +151,15 @@ export default function HomePage() {
 
         {/* Action Buttons */}
         <div className="grid grid-cols-2 gap-4 w-full pt-4">
-          <Button className="bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--accent))] text-primary-foreground hover:opacity-90 transition-opacity text-base font-bold py-4 rounded-lg h-auto">
+          <Button 
+            onClick={handleStartRun} // Added onClick handler
+            className="bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--accent))] text-primary-foreground hover:opacity-90 transition-opacity text-base font-bold py-4 rounded-lg h-auto">
             <Play className="mr-2 h-5 w-5" />
             START RUN
           </Button>
-          <Button className="bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--accent))] text-primary-foreground hover:opacity-90 transition-opacity text-base font-bold py-4 rounded-lg h-auto">
+          <Button 
+            onClick={handleJournal}
+            className="bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--accent))] text-primary-foreground hover:opacity-90 transition-opacity text-base font-bold py-4 rounded-lg h-auto">
             <BookOpen className="mr-2 h-5 w-5" />
             JOURNAL
           </Button>
