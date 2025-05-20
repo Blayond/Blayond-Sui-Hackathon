@@ -46,22 +46,23 @@ export default function RunPage() {
                   <stop offset="100%" style={{ stopColor: 'hsl(var(--accent))' }} />
                 </linearGradient>
               </defs>
-              <circle
-                cx="150"
-                cy="50"
-                r="35"
+              {/* Updated Winding Path */}
+              <path
+                d="M20 60 L60 30 L100 70 L140 40 L180 80 L220 50 C230 45, 240 45, 250 50 C260 55, 270 65, 280 60"
                 stroke="url(#runTrackGradient)"
-                strokeWidth="5"
+                strokeWidth="6" 
                 fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
-              {/* Current position indicator on the circle's right side */}
+              {/* Current position indicator on the path's end */}
               <circle
-                cx="185"  /* cx (150) + r (35) */
-                cy="50"
-                r="5"
+                cx="280" 
+                cy="60"
+                r="7" 
                 fill="hsl(var(--background))"
                 stroke="hsl(var(--accent))"
-                strokeWidth="2.5"
+                strokeWidth="3"
               />
             </svg>
           </div>
@@ -92,3 +93,4 @@ export default function RunPage() {
     </div>
   );
 }
+
