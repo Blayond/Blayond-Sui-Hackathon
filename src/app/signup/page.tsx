@@ -26,6 +26,9 @@ export default function SignUpPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isGoogleLoading, setIsGoogleLoading] = useState(false);
+  const [isWalletLoading, setIsWalletLoading] = useState(false);
+
 
   const handleCreateAccount = async () => {
     if (!email || !password) {
@@ -67,7 +70,7 @@ export default function SignUpPage() {
   };
 
   const handleGoogleLogin = async () => {
-    setIsLoading(true);
+    setIsGoogleLoading(true);
     const provider = new GoogleAuthProvider();
     try {
       const userCredential: UserCredential = await signInWithPopup(auth, provider);
@@ -86,17 +89,19 @@ export default function SignUpPage() {
         variant: "destructive",
       });
     } finally {
-      setIsLoading(false);
+      setIsGoogleLoading(false);
     }
   };
 
   const handleWalletSignUp = () => {
+    setIsWalletLoading(true);
     console.log('Wallet sign-up clicked.');
     toast({
         title: "Coming Soon!",
         description: "Wallet sign-up functionality is not yet implemented.",
       });
-    // Placeholder: Add wallet sign-up logic (e.g., open modal)
+    // Simulate async operation
+    setTimeout(() => setIsWalletLoading(false), 1000);
   };
 
   return (
@@ -120,7 +125,7 @@ export default function SignUpPage() {
           onChange={(e) => setEmail(e.target.value)}
           className="rounded-lg border-[hsl(var(--border))] bg-[hsl(var(--input))] text-[hsl(var(--foreground))] placeholder:text-[hsl(var(--muted-foreground))] focus:ring-2 focus:ring-[hsl(var(--ring))]"
           aria-label="Email"
-          disabled={isLoading}
+          disabled={isLoading || isGoogleLoading || isWalletLoading}
         />
         <Input
           type="password"
@@ -129,16 +134,16 @@ export default function SignUpPage() {
           onChange={(e) => setPassword(e.target.value)}
           className="rounded-lg border-[hsl(var(--border))] bg-[hsl(var(--input))] text-[hsl(var(--foreground))] placeholder:text-[hsl(var(--muted-foreground))] focus:ring-2 focus:ring-[hsl(var(--ring))]"
           aria-label="Create a password"
-          disabled={isLoading}
+          disabled={isLoading || isGoogleLoading || isWalletLoading}
         />
       </div>
 
       <Button
         onClick={handleCreateAccount}
         className="w-full bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--accent))] text-primary-foreground hover:opacity-90 transition-opacity text-lg font-bold py-6 rounded-lg"
-        disabled={isLoading}
+        disabled={isLoading || isGoogleLoading || isWalletLoading}
       >
-        {isLoading ? 'Creating Account...' : 'CREATE ACCOUNT'}
+        {isLoading ? 'CREATING ACCOUNT...' : 'CREATE ACCOUNT'}
       </Button>
 
       <div className="my-6 flex items-center">
@@ -148,27 +153,25 @@ export default function SignUpPage() {
       </div>
 
       <div className="space-y-4">
-        <div className="p-[2px] bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--accent))] rounded-lg">
-          <Button
-            variant="outline"
+         <Button
+            variant="secondary" 
             onClick={handleGoogleLogin}
-            className="w-full bg-[hsl(var(--background))] border-none hover:bg-[hsl(var(--input))] text-[hsl(var(--foreground))] py-3 rounded-[calc(var(--radius)-2px)]"
-            disabled={isLoading}
+            className="w-full py-3 rounded-lg text-secondary-foreground"
+            disabled={isLoading || isGoogleLoading || isWalletLoading}
           >
             <GoogleIcon className="mr-2 h-5 w-5" />
-            {isLoading ? 'Signing in...' : 'Continue with Google'}
+            {isGoogleLoading ? 'Signing in...' : 'Continue with Google'}
           </Button>
-        </div>
         
         <div className="p-[2px] bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--accent))] rounded-lg">
           <Button
             variant="outline"
             onClick={handleWalletSignUp}
             className="w-full bg-[hsl(var(--background))] border-none hover:bg-[hsl(var(--input))] text-[hsl(var(--foreground))] py-3 rounded-[calc(var(--radius)-2px)]" 
-            disabled={isLoading}
+            disabled={isLoading || isGoogleLoading || isWalletLoading}
           >
             <Wallet className="mr-2 h-5 w-5" />
-            Sign up with Wallet
+             {isWalletLoading ? 'Processing...' : 'Sign up with Wallet'}
           </Button>
         </div>
       </div>

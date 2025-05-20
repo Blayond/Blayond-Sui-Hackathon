@@ -26,6 +26,8 @@ export default function SignInPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isGoogleLoading, setIsGoogleLoading] = useState(false);
+  const [isWalletLoading, setIsWalletLoading] = useState(false);
 
   const handleSignIn = async () => {
     if (!email || !password) {
@@ -65,7 +67,7 @@ export default function SignInPage() {
   };
 
   const handleGoogleLogin = async () => {
-    setIsLoading(true);
+    setIsGoogleLoading(true);
     const provider = new GoogleAuthProvider();
     try {
       const userCredential: UserCredential = await signInWithPopup(auth, provider);
@@ -84,16 +86,18 @@ export default function SignInPage() {
         variant: "destructive",
       });
     } finally {
-      setIsLoading(false);
+      setIsGoogleLoading(false);
     }
   };
 
   const handleWalletSignIn = () => {
+    setIsWalletLoading(true);
     console.log('Wallet sign-in clicked.');
     toast({
         title: "Coming Soon!",
         description: "Wallet sign-in functionality is not yet implemented.",
       });
+    setTimeout(() => setIsWalletLoading(false), 1000);
   };
 
   return (
@@ -117,7 +121,7 @@ export default function SignInPage() {
           onChange={(e) => setEmail(e.target.value)}
           className="rounded-lg border-[hsl(var(--border))] bg-[hsl(var(--input))] text-[hsl(var(--foreground))] placeholder:text-[hsl(var(--muted-foreground))] focus:ring-2 focus:ring-[hsl(var(--ring))]"
           aria-label="Email"
-          disabled={isLoading}
+          disabled={isLoading || isGoogleLoading || isWalletLoading}
         />
         <Input
           type="password"
@@ -126,14 +130,14 @@ export default function SignInPage() {
           onChange={(e) => setPassword(e.target.value)}
           className="rounded-lg border-[hsl(var(--border))] bg-[hsl(var(--input))] text-[hsl(var(--foreground))] placeholder:text-[hsl(var(--muted-foreground))] focus:ring-2 focus:ring-[hsl(var(--ring))]"
           aria-label="Password"
-          disabled={isLoading}
+          disabled={isLoading || isGoogleLoading || isWalletLoading}
         />
       </div>
 
       <Button
         onClick={handleSignIn}
         className="w-full bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--accent))] text-primary-foreground hover:opacity-90 transition-opacity text-lg font-bold py-6 rounded-lg"
-        disabled={isLoading}
+        disabled={isLoading || isGoogleLoading || isWalletLoading}
       >
         {isLoading ? 'LOGGING IN...' : 'LOG IN'}
       </Button>
@@ -146,13 +150,13 @@ export default function SignInPage() {
 
       <div className="space-y-4">
          <Button
-            variant="secondary" // Solid dark button
+            variant="secondary" 
             onClick={handleGoogleLogin}
-            className="w-full py-3 rounded-lg text-secondary-foreground" // Ensure white/light text
-            disabled={isLoading}
+            className="w-full py-3 rounded-lg text-secondary-foreground" 
+            disabled={isLoading || isGoogleLoading || isWalletLoading}
           >
             <GoogleIcon className="mr-2 h-5 w-5" />
-            {isLoading ? 'Signing in...' : 'Continue with Google'}
+            {isGoogleLoading ? 'Signing in...' : 'Continue with Google'}
           </Button>
         
         <div className="p-[2px] bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--accent))] rounded-lg">
@@ -160,10 +164,10 @@ export default function SignInPage() {
             variant="outline"
             onClick={handleWalletSignIn}
             className="w-full bg-[hsl(var(--background))] border-none hover:bg-[hsl(var(--input))] text-[hsl(var(--foreground))] py-3 rounded-[calc(var(--radius)-2px)]" 
-            disabled={isLoading}
+            disabled={isLoading || isGoogleLoading || isWalletLoading}
           >
             <Wallet className="mr-2 h-5 w-5" />
-            Sign In with Wallet
+            {isWalletLoading ? 'Processing...' : 'Sign In with Wallet'}
           </Button>
         </div>
       </div>
