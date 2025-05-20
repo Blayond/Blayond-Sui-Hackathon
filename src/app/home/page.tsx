@@ -8,7 +8,7 @@ import { auth } from '@/lib/firebase/config';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
-import HexagonLogo from '@/components/auth/hexagon-logo';
+import SiteLogo from '@/components/common/SiteLogo'; // Updated import
 import BottomNavigation from '@/components/layout/bottom-navigation';
 import { Settings, Flame, Play, BookOpen, Wallet } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
@@ -80,7 +80,7 @@ export default function HomePage() {
       {/* Main Content Area */}
       <main className="flex flex-col items-center w-full max-w-md mx-auto px-4 space-y-6 flex-grow pt-20 pb-24">
         <div className="flex flex-col items-center space-y-2">
-          <HexagonLogo />
+          <SiteLogo /> {/* Updated component */}
           <h1 className="text-4xl font-bold text-gradient-pink-orange">BLAYOND</h1>
         </div>
 

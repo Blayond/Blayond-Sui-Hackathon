@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import AuthFormWrapper from '@/components/auth/auth-form-wrapper';
-import HexagonLogo from '@/components/auth/hexagon-logo';
+import SiteLogo from '@/components/common/SiteLogo'; // Updated import
 import { GoogleIcon } from '@/components/icons/google-icon';
 import { Wallet } from 'lucide-react';
 import { auth } from '@/lib/firebase/config';
@@ -25,7 +25,7 @@ export default function SignUpPage() {
   const { toast } = useToast();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  const [isEmailLoading, setIsEmailLoading] = useState(false);
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
   const [isWalletLoading, setIsWalletLoading] = useState(false);
 
@@ -39,7 +39,7 @@ export default function SignUpPage() {
       });
       return;
     }
-    setIsLoading(true);
+    setIsEmailLoading(true);
     try {
       const userCredential: UserCredential = await createUserWithEmailAndPassword(auth, email, password);
       console.log('Account created:', userCredential.user);
@@ -65,7 +65,7 @@ export default function SignUpPage() {
         variant: "destructive",
       });
     } finally {
-      setIsLoading(false);
+      setIsEmailLoading(false);
     }
   };
 
@@ -104,10 +104,12 @@ export default function SignUpPage() {
     setTimeout(() => setIsWalletLoading(false), 1000);
   };
 
+  const isLoading = isEmailLoading || isGoogleLoading || isWalletLoading;
+
   return (
     <AuthFormWrapper>
       <div className="flex flex-col items-center space-y-4">
-        <HexagonLogo />
+        <SiteLogo /> {/* Updated component */}
         <h1 className="text-4xl font-bold text-gradient-pink-orange">
           BLAYOND
         </h1>
@@ -125,7 +127,7 @@ export default function SignUpPage() {
           onChange={(e) => setEmail(e.target.value)}
           className="rounded-lg border-[hsl(var(--border))] bg-[hsl(var(--input))] text-[hsl(var(--foreground))] placeholder:text-[hsl(var(--muted-foreground))] focus:ring-2 focus:ring-[hsl(var(--ring))]"
           aria-label="Email"
-          disabled={isLoading || isGoogleLoading || isWalletLoading}
+          disabled={isLoading}
         />
         <Input
           type="password"
@@ -134,16 +136,16 @@ export default function SignUpPage() {
           onChange={(e) => setPassword(e.target.value)}
           className="rounded-lg border-[hsl(var(--border))] bg-[hsl(var(--input))] text-[hsl(var(--foreground))] placeholder:text-[hsl(var(--muted-foreground))] focus:ring-2 focus:ring-[hsl(var(--ring))]"
           aria-label="Create a password"
-          disabled={isLoading || isGoogleLoading || isWalletLoading}
+          disabled={isLoading}
         />
       </div>
 
       <Button
         onClick={handleCreateAccount}
         className="w-full bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--accent))] text-primary-foreground hover:opacity-90 transition-opacity text-lg font-bold py-6 rounded-lg"
-        disabled={isLoading || isGoogleLoading || isWalletLoading}
+        disabled={isLoading}
       >
-        {isLoading ? 'CREATING ACCOUNT...' : 'CREATE ACCOUNT'}
+        {isEmailLoading ? 'CREATING ACCOUNT...' : 'CREATE ACCOUNT'}
       </Button>
 
       <div className="my-6 flex items-center">
@@ -153,22 +155,24 @@ export default function SignUpPage() {
       </div>
 
       <div className="space-y-4">
-         <Button
-            variant="secondary" 
+        <div className="p-[2px] bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--accent))] rounded-lg">
+          <Button
+            variant="outline" // To achieve gradient border with dark background
             onClick={handleGoogleLogin}
-            className="w-full py-3 rounded-lg text-secondary-foreground"
-            disabled={isLoading || isGoogleLoading || isWalletLoading}
+            className="w-full bg-[hsl(var(--background))] border-none hover:bg-[hsl(var(--input))] text-[hsl(var(--foreground))] py-3 rounded-[calc(var(--radius)-2px)]"
+            disabled={isLoading}
           >
             <GoogleIcon className="mr-2 h-5 w-5" />
             {isGoogleLoading ? 'Signing in...' : 'Continue with Google'}
           </Button>
+        </div>
         
         <div className="p-[2px] bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--accent))] rounded-lg">
           <Button
             variant="outline"
             onClick={handleWalletSignUp}
             className="w-full bg-[hsl(var(--background))] border-none hover:bg-[hsl(var(--input))] text-[hsl(var(--foreground))] py-3 rounded-[calc(var(--radius)-2px)]" 
-            disabled={isLoading || isGoogleLoading || isWalletLoading}
+            disabled={isLoading}
           >
             <Wallet className="mr-2 h-5 w-5" />
              {isWalletLoading ? 'Processing...' : 'Sign up with Wallet'}
