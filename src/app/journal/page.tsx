@@ -3,7 +3,7 @@
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card"; // Removed CardHeader and CardTitle as they are not directly used for list items here
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import BottomNavigation from "@/components/layout/bottom-navigation";
 import { Wallet } from "lucide-react";
@@ -18,13 +18,31 @@ const journalEntries = [
   },
   {
     distance: "19 km",
-    duration: "19m", // Note: Image shows 19m for 19km, might be a typo. Using as is.
+    duration: "19m", 
     details: "19 min • 145 bpm • 6:29 /km • Afternoon",
   },
   {
     distance: "41 km",
     duration: "41m",
     details: "41 min • 158 bpm • 6:18 /km • Evening",
+  },
+];
+
+const rewardEntries = [
+  {
+    amount: "+1,250 points",
+    source: "From running",
+    date: "Apr 15",
+  },
+  {
+    amount: "$10 GHO",
+    source: "From selling data",
+    date: "Apr 15",
+  },
+  {
+    amount: "$100 GHO",
+    source: "From competition prize",
+    date: "Apr 8",
   },
 ];
 
@@ -111,10 +129,24 @@ export default function JournalPage() {
               </Card>
             ))}
           </TabsContent>
-          <TabsContent value="rewards" className="mt-4">
-            <p className="text-center text-muted-foreground">
-              Rewards coming soon!
-            </p>
+          <TabsContent value="rewards" className="mt-4 space-y-4">
+            {rewardEntries.map((reward, index) => (
+              <Card key={index} className="w-full bg-card shadow-lg">
+                <CardContent className="p-4 flex justify-between items-start"> {/* items-start to align date correctly */}
+                  <div>
+                    <p className="text-xl font-bold text-primary">
+                      {reward.amount}
+                    </p>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      {reward.source}
+                    </p>
+                  </div>
+                  <p className="text-sm text-muted-foreground whitespace-nowrap">
+                    {reward.date}
+                  </p>
+                </CardContent>
+              </Card>
+            ))}
           </TabsContent>
         </Tabs>
       </main>
